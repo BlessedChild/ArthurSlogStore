@@ -1,4 +1,4 @@
-# empty-project-less-react-react-hot-loader-lodash
+# ArthurSlogStore_1
 
 Empty project.
 
