@@ -7,7 +7,7 @@ const searchBarStyle = { position: 'relative', marginTop: 0, width: '100%', heig
 const searchBarIconStyle = { position: 'absolute', left: '0px', width: '88px', height: '88px', backgroundColor: 'rgba(0,0,0,0.1)', textAlign: 'center', lineHeight: '88px', borderStyle: 'none', borderRadius: '50px' }
 const searchStyle = { position: 'relative', marginTop: 0, backgroundColor: 'rgba(0,0,0,0.1)', width: '100%', height: '84px', fontSize: 40, textAlign: 'center', borderStyle: 'none', borderRadius: '50px', border: '1px solid #F2F2F2' }
 */
-import './index.less'
+
 
 // Header区域渲染的内容
 class Header extends Component {

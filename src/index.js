@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 // 引用第三方插件react-hot-loader里的hot方法
 import { hot } from 'react-hot-loader'
 
+import './index.less'
 /*
 // this.props 拿到上一级传过来的数据
 class App extends React.Component {

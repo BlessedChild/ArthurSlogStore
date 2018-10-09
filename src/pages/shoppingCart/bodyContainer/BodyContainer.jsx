@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import StoreIndex from './pages/storeIndex/index'
 
+import ProductTable from './productTable/productTable'
 // BodyContainet区域的样式
-const bodyContainerBarStyle = { position: "relative", marginTop: 0, marginBottom: 128, height: '100%', width: '100%' }
+// const bodyContainerBarStyle = { position: "relative", marginTop: 0, marginBottom: 128, height: '100%', width: '100%' }
 
 // BodyContainer区域渲染的内容
 class BodyContainer extends Component {
@@ -19,15 +19,18 @@ class BodyContainer extends Component {
             </div>
     }
     */
+   
     render() {
-        return <div className='bodyContainer' style={bodyContainerBarStyle}>
-            <StoreIndex />
-        </div>
+        return <div className='shoppingCart'>
+                <ProductTable />
+            </div>
     }
 
+    /*
     toucha() {
         alert("Im an a")
     }
+    */
 }
 
 export default BodyContainer

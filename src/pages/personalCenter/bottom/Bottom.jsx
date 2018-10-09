@@ -10,6 +10,7 @@ const bottomTabBarItemImg = { height: '88px', width: '88px', textAlign: 'center'
 const bottomTabBarItemText = { height: '40px' }
 
 class Bottom extends Component {
+
     // 对应‘购物车’按钮
     // 这里创建一个函数，用于向服务器请求shoppingCart相关的数据，点击购物车按钮时执行（然后渲染购物车页面，隐藏Header组件，替换BodyContainer组件的页面）？所以想到这里，BodyContainer组件是不是需要做成由动态组件组成的？根据数据进行渲染？还是直接路由道购物车页面？
     // 然后，把获得的数据传给shoppingCart页面
@@ -23,19 +24,19 @@ class Bottom extends Component {
     render() {
         return <div className='bottom' style={bottomStyle}>
             <div className='bottomTabBar' style={bottomTabBarStyle}>
-                <div className='storeIndex' style={bottomTabBarItemStyleLeft} onClick={this.touchBottomTabBar}>
+                <div className='storeIndex' style={bottomTabBarItemStyleLeft} onClick={this.touchBottomTabBar.bind(this, 0)}>
                     <div style={bottomTabBarItemImg}>图片</div>
                     <div style={bottomTabBarItemText}>商城首页</div>
                 </div>
-                <div className='shoppingCart' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar}>
+                <div className='shoppingCart' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 1)}>
                     <div style={bottomTabBarItemImg}>图片</div>
                     <div style={bottomTabBarItemText}>购物车</div>
                 </div>
-                <div className='promotionCenter' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar}>
+                <div className='promotionCenter' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 2)}>
                     <div style={bottomTabBarItemImg}>图片</div>
                     <div style={bottomTabBarItemText}>推广中心</div>
                 </div>
-                <div className='personalCenter' style={bottomTabBarItemStyleRight} onClick={this.touchBottomTabBar}>
+                <div className='personalCenter' style={bottomTabBarItemStyleRight} onClick={this.touchBottomTabBar.bind(this, 3)}>
                     <div style={bottomTabBarItemImg}>图片</div>
                     <div style={bottomTabBarItemText}>个人中心</div>
                 </div>
@@ -43,11 +44,9 @@ class Bottom extends Component {
         </div>
     }
 
-    touchBottomTabBar() {
-        alert("Im an alert")
+    touchBottomTabBar(e) {
+        this.props.changePage(e)
     }
-
-
 }
 
 export default Bottom

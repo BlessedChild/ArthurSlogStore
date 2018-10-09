@@ -2,10 +2,12 @@
 // 用来承载购物车页面上的所有组件
 import React, { Component } from 'react'
 
-// 这里引入一个组件，显示用户加入购物车的商品的数据，这里这个组件应该是一个列表
-import shoppingCartProductsList from './shoppingCartProductsList'
+import BodyContainer from './bodyContainer/BodyContainer'
+import Bottom from './Bottom/Bottom'
 
-const bodyContainer_shopingCartStyle = { zIndex: -1, position: "relative", marginTop: 0, marginBottom: 128, height: '100%', width: '100%', fontSize: 40, textAlign: 'center' }
+import './index.less'
+// 这里引入一个组件，显示用户加入购物车的商品的数据，这里这个组件应该是一个列表
+// import shoppingCartProductsList from './shoppingCartProductsList'
 
 class shoppingCart extends Component {
 
@@ -17,9 +19,9 @@ class shoppingCart extends Component {
 
     // 然后，把获得的数据传给
     render() {
-        return <div className='bodyContainer_shopingCart' style={bodyContainer_shopingCartStyle}>
-            ShoppingCart
-            <shoppingCartProductsList />
+        return <div>
+            <BodyContainer />
+            <Bottom changePage = {this.props.changePage}/>
         </div>
     }
 }
