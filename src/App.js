@@ -1,13 +1,16 @@
 ///
-/// 构造虚拟dom对象
+/// 构造 虚拟dom对象（数据结构）
 ///
 import React, { Component } from 'react'
 
-// 引入四个主界面
-import StoreIndex from './pages/storeIndex/index'
-import ShoppingCart from './pages/shoppingCart/index'
-import PromotionCenter from './pages/promotionCenter/index'
-import PersonalCenter from './pages/personalCenter/index'
+// 引入mobile的四个主界面
+import StoreIndex from './pages/pages_mobile/storeIndex/index'
+import ShoppingCart from './pages/pages_mobile/shoppingCart/index'
+import StoreActivity from './pages/pages_mobile/storeActivity/index'
+import PersonalCenter from './pages/pages_mobile/personalCenter/index'
+
+// 引入pc的主界面
+import StoreIndex_Pc from './pages/pages_pc/storeIndex/index'
 
 // 引入配置文件
 import Config from './config.json'
@@ -16,16 +19,60 @@ class App extends Component {
 
   constructor() {
     super()
-    this.state = { padeId: [] }
+    this.state = {
+      data: [],
+      padeId: []
+    }
   }
+
   render() {
-    // 把四个主界面放在 index 对象里，根据 pageId 的值，选择渲染的界面
+    let index
+
+    function browserRedirect() {
+      let sUserAgent = navigator.userAgent.toLowerCase()
+      let bIsIpad = sUserAgent.match(/ipad/i) == "ipad"
+      let bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os"
+      let bIsMidp = sUserAgent.match(/midp/i) == "midp"
+      let bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4"
+      let bIsUc = sUserAgent.match(/ucweb/i) == "ucweb"
+      let bIsAndroid = sUserAgent.match(/android/i) == "android"
+      let bIsCE = sUserAgent.match(/windows ce/i) == "windows ce"
+      let bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile"
+      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+        index = 'mobile'
+      }
+      else {
+        index = 'pc'
+      }
+    }
+
+    browserRedirect()
+    
+    // 把四个主界面放在 mobile端 对象里，根据 pageId 的值，选择渲染的界面
     // 例如：
     // padeId = 0，意思就是渲染 StoreIndex 界面
     // padeId = 1，意思就是渲染 ShoppingCart 界面
     // padeId = 2，意思就是渲染 PromotionCenter 界面
     // padeId = 3，意思就是渲染 PersonalCenter 界面
-    const index = [<StoreIndex changePage = {pageId => this.changePage(pageId)} />, <ShoppingCart changePage = {pageId => this.changePage(pageId)}/>, <PromotionCenter changePage = {pageId => this.changePage(pageId)}/>, <PersonalCenter changePage = {pageId => this.changePage(pageId)}/>]
+
+    // mobile端
+    let mobile = [<StoreIndex changePage={pageId => this.changePage(pageId)} />, <ShoppingCart changePage={pageId => this.changePage(pageId)} />, <StoreActivity changePage={pageId => this.changePage(pageId)} />, <PersonalCenter changePage={pageId => this.changePage(pageId)} />]
+    // pc端 
+    let pc = [<StoreIndex_Pc />]
+
+    // 判断客户端是mobile还是pc
+    // 根据结果 对页面采用合适的布局
+    if (1) {
+      index = mobile
+      //alert('当前客户端是PC')
+    }
+    else if (0) {
+      index = pc
+      //alert('当前客户端是Mobile')
+    }
+    else {
+      alert('请使用Pc浏览器或手机浏览器打开')
+    }
 
     return <div className='page-container'>
       {index[this.state.pageId]}
@@ -45,7 +92,7 @@ class App extends Component {
     })
   }
 
-  changePage(pageIds){
+  changePage(pageIds) {
     this.setState({
       pageId: pageIds
     })
@@ -65,6 +112,9 @@ class App extends Component {
                 if (issue.completionDate)
                   issue.completionDate = new Date(issue.completionDate)
               })
+              // 把服务端传过来的所有数据 存储在 本组件的全局对象 state里面的 data对象里
+              this.setState({ data: data })
+              // 把服务端传过来的records数据 存储在 本组件的全局对象 state里面的 issues对象里
               this.setState({ issues: data.records })
             })
         } else {
@@ -81,7 +131,7 @@ class App extends Component {
 
   }
 
-  
+
 
   /*
   // 向服务器添加数据
