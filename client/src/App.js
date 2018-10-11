@@ -47,7 +47,7 @@ class App extends Component {
     }
 
     browserRedirect()
-    
+
     // 把四个主界面放在 mobile端 对象里，根据 pageId 的值，选择渲染的界面
     // 例如：
     // padeId = 0，意思就是渲染 StoreIndex 界面
@@ -131,6 +131,44 @@ class App extends Component {
 
   }
 
+  changebottomTabBar(newData) {
+    //console.log(JSON.stringify(newIssue))
+    console.log('Add data to message')
+    if ((newData.count != 0) && (newData.count < 5)) {
+      console.log('NewIssue.owner is true')
+      console.log('NewIssue.owner: ', newIssue.count)
+
+      fetch('http://localhost:3000/api/changebottomTabBar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newIssue),
+      })
+        .then(response => {
+          console.log('Add data to message successfuly')
+          const resmsg = response.json()
+          console.log('Response1: ', resmsg)
+          console.log('Response2: ', response)
+          return resmsg
+        })
+        .then(updateIssue => {
+          console.log('UpdateIssue1: ', updateIssue)
+          updateIssue.created = new Date(updateIssue.created)
+          if (updateIssue.completionDate)
+            updateIssue.completionDate = new Date(updateIssue.completionDate)
+
+          const newIssue = this.state.issues.concat(updateIssue)
+          this.setState({ issues: newIssue })
+          console.log('UpdateIssue2: ', updateIssue)
+        })
+        .catch(err => {
+          alert("Error in sending data to server: " + err.message)
+        })
+    } else {
+      console.log('NewIssue.owner is false')
+    }
+  }
 
 
   /*
