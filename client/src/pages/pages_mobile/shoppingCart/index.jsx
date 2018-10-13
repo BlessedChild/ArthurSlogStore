@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 import BodyContainer from './bodyContainer/BodyContainer'
-import Bottom from './Bottom/Bottom'
+import Bottom from './bottom/Bottom'
 
 import './index.less'
 // 这里引入一个组件，显示用户加入购物车的商品的数据，这里这个组件应该是一个列表

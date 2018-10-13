@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-const storeIndexStyle = { position: "relative", marginTop: 0, height: '100%', width: '100%', fontSize: 40, textAlign: 'center' }
-const carouselAreaStyle = { width: '100%', height: '455px', fontSize: 40, textAlign: 'center', lineHeight: '455px' }
+import Carouselarea from './carouselarea/carouselarea'
+
 const bulletinBoardStyle = { alignItems: 'center', display: 'flex', flexDirection: 'raw', width: '100%', height: 64, fontSize: 40, textAlign: 'center', borderStyle: 'none' }
 const productListStyle = { width: '100%', fontSize: 40, textAlign: 'center' }
 const dividingLineStyle = { backgroundColor: '#000000', height: 1, width: '100%' }
@@ -37,23 +37,11 @@ const navigationBarIconItemStyle = { width: '200px', height: '200px', textAlign:
 
 // BodyContainer区域渲染的内容
 class BodyContainer extends Component {
-    /*
+
     render() {
         return <div>
-                <div>2. navigationBar（导航栏）</div>
-                <div>2.1 所有商品|2.2 拼团|2.3 促销</div>
-                <div>商品1|商品2|商品3</div>
-                <div>商品4|商品5|商品6</div>
-                <div>商品7|商品8|商品9</div>
-                <IssueList />
-            </div>
-    }
-    */
-   
-    render() {
-        return <div className='storeIndex' style={storeIndexStyle}>
+        <Carouselarea />
         <div>
-            <div className='carouselArea' style={carouselAreaStyle} onClick={this.toucha}>carouselArea（轮播区域）</div>
             <div style={dividingLineStyle}></div>
             <div style={bulletinBoardStyle} onClick={this.toucha}>
                 <div style={bulletinBoardIconStyle} >图片</div>

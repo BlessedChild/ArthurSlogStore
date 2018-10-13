@@ -30,11 +30,11 @@ class Bottom extends Component {
                 </div>
                 <div className='shoppingCart' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 1)}>
                     <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>购物车</div>
+                    <div style={bottomTabBarItemText}>全部商品</div>
                 </div>
                 <div className='promotionCenter' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 2)}>
                     <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>推广中心</div>
+                    <div style={bottomTabBarItemText}>购物车</div>
                 </div>
                 <div className='personalCenter' style={bottomTabBarItemStyleRight} onClick={this.touchBottomTabBar.bind(this, 3)}>
                     <div style={bottomTabBarItemImg}>图片</div>

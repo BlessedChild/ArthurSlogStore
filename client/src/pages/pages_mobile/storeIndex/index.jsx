@@ -18,6 +18,38 @@ class storeIndex extends Component {
             <Bottom changePage = {this.props.changePage}/>
         </div>
     }
+
+    getStoreIndexDate(){
+        fetch(Config.baseUrl + 'api/issues/GET')
+      .then(response => {
+        if (response.ok) {
+          console.log('Connect Server')
+          response.json()
+            .then(data => {
+              console.log('Total count of records:', data._metadata.total_count)
+              data.records.forEach(issue => {
+                issue.created = new Date(issue.created)
+                if (issue.completionDate)
+                  issue.completionDate = new Date(issue.completionDate)
+              })
+              // 把服务端传过来的所有数据 存储在 本组件的全局对象 state里面的 data对象里
+              this.setState({ data: data })
+              // 把服务端传过来的records数据 存储在 本组件的全局对象 state里面的 issues对象里
+              this.setState({ issues: data.records })
+            })
+        } else {
+          console.log('Disconnect Server')
+          response.json()
+            .then(err => {
+              alert("Failed to fetch issues: " + err.message)
+            })
+            .catch(err => {
+              alert("Error in sending data to server: " + err.message)
+            })
+        }
+      })
+
+    }
 }
 
 export default storeIndex

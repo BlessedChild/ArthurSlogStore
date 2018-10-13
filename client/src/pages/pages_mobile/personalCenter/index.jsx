@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 import BodyContainer from './bodyContainer/BodyContainer'
-import Bottom from './Bottom/Bottom'
+import Bottom from './bottom/Bottom'
 
 import './index.less'
 // 这里引入子组件

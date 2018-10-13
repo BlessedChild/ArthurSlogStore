@@ -87,14 +87,15 @@ class App extends Component {
     this.loadData()
     console.log('componentDidMount OK')
     // 载入StoreIndex页面
-    this.setState({
-      pageId: 0
+    this.setState(() => {
+      // Important: read `state` instead of `this.state` when updating.
+      return { pageId: 0 }
     })
   }
 
   changePage(pageIds) {
-    this.setState({
-      pageId: pageIds
+    this.setState(() => {
+      return { pageId: pageIds }
     })
   }
 
