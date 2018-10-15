@@ -40,177 +40,178 @@ class BodyContainer extends Component {
 
     render() {
         return <div>
-        <Carouselarea />
-        <div>
-            <div style={dividingLineStyle}></div>
-            <div style={bulletinBoardStyle} onClick={this.toucha}>
-                <div style={bulletinBoardIconStyle} >图片</div>
-                <div className='bulletinBoard'>bulletinBoard（公告栏）</div>
+            <Carouselarea />
+            <div>
+                <div style={dividingLineStyle}></div>
+                <div style={bulletinBoardStyle} onClick={this.toucha}>
+                    <div style={bulletinBoardIconStyle} >图片</div>
+                    <div className='bulletinBoard'>bulletinBoard（公告栏）</div>
+                </div>
+                <div style={dividingLineStyle}></div>
+            </div>
+            <div className='navigationBar' style={navigationBarStyle}>
+                <div style={navigationBarItemStyleLeft}>
+                    <div style={navigationBarIconItemStyle}>图片</div>
+                    <div>所有商品</div>
+                </div>
+                <div style={navigationBarItemStyle}>
+                    <div style={navigationBarIconItemStyle}>图片</div>
+                    <div>拼团</div>
+                </div>
+                <div style={navigationBarItemStyle}>
+                    <div style={navigationBarIconItemStyle}>图片</div>
+                    <div>限时促销</div>
+                </div>
+                <div style={navigationBarItemStyleLRight}>
+                    <div style={navigationBarIconItemStyle}>图片</div>
+                    <div>秒杀</div>
+                </div>
             </div>
             <div style={dividingLineStyle}></div>
+            <div className='recommend' style={recommendStyle}>
+                <div style={recommendIconStyle}>图片</div>
+                <div>热销推荐</div>
+            </div>
+            <div style={dividingLineStyle}></div>
+            <div className='category'>
+                <div style={categoryStyle}>
+                    <div style={categoryItemStyleLeft}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目1</div>
+                    </div>
+                    <div style={categoryItemStyle}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目2</div>
+                    </div>
+                    <div style={categoryItemStyleLRight}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目3</div>
+                    </div>
+                </div>
+                <div style={categoryStyle}>
+                    <div style={categoryItemStyleLeft}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目4</div>
+                    </div>
+                    <div style={categoryItemStyle}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目5</div>
+                    </div>
+                    <div style={categoryItemStyleLRight}>
+                        <div style={categoryImgItemStyleLeft}>图片</div>
+                        <div>类目6</div>
+                    </div>
+                </div>
+            </div>
+            <div style={dividingLineStyle}></div>
+            <div className='productList' style={productListStyle}>
+                <div style={productStyle}>
+                    <div style={productItemStyleLeft}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={productItemStyleRight}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style={productStyle}>
+                    <div style={productItemStyleLeft}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={productItemStyleRight}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style={productStyle}>
+                    <div style={productItemStyleLeft}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={productItemStyleRight}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style={productStyle}>
+                    <div style={productItemStyleLeft}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={productItemStyleRight}>
+                        <div style={productImgItemStyle}>图片</div>
+                        <div style={productItemInfoStyle}>
+                            <div style={productItemInfoTextStyle}>
+                                商品介绍
+                        </div>
+                            <div style={productItemInfoPriceStyle}>
+                                <span style={productItemInfoTextareaStyle}>¥</span>
+                                <span style={productItemInfoTextareaStyle}>8888</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style={{ marginBottom: '256px' }}></div>
         </div>
-        <div className='navigationBar' style={navigationBarStyle}>
-            <div style={navigationBarItemStyleLeft}>
-                <div style={navigationBarIconItemStyle}>图片</div>
-                <div>所有商品</div>
-            </div>
-            <div style={navigationBarItemStyle}>
-                <div style={navigationBarIconItemStyle}>图片</div>
-                <div>拼团</div>
-            </div>
-            <div style={navigationBarItemStyle}>
-                <div style={navigationBarIconItemStyle}>图片</div>
-                <div>限时促销</div>
-            </div>
-            <div style={navigationBarItemStyleLRight}>
-                <div style={navigationBarIconItemStyle}>图片</div>
-                <div>秒杀</div>
-            </div>
-        </div>
-        <div style={dividingLineStyle}></div>
-        <div className='recommend' style={recommendStyle}>
-            <div style={recommendIconStyle}>图片</div>
-            <div>热销推荐</div>
-        </div>
-        <div style={dividingLineStyle}></div>
-        <div className='category'>
-            <div style={categoryStyle}>
-                <div style={categoryItemStyleLeft}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目1</div>
-                </div>
-                <div style={categoryItemStyle}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目2</div>
-                </div>
-                <div style={categoryItemStyleLRight}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目3</div>
-                </div>
-            </div>
-            <div style={categoryStyle}>
-                <div style={categoryItemStyleLeft}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目4</div>
-                </div>
-                <div style={categoryItemStyle}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目5</div>
-                </div>
-                <div style={categoryItemStyleLRight}>
-                    <div style={categoryImgItemStyleLeft}>图片</div>
-                    <div>类目6</div>
-                </div>
-            </div>
-        </div>
-        <div style={dividingLineStyle}></div>
-        <div className='productList' style={productListStyle}>
-            <div style={productStyle}>
-                <div style={productItemStyleLeft}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={productItemStyleRight}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style={productStyle}>
-                <div style={productItemStyleLeft}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={productItemStyleRight}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style={productStyle}>
-                <div style={productItemStyleLeft}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={productItemStyleRight}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style={productStyle}>
-                <div style={productItemStyleLeft}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-                <div style={productItemStyleRight}>
-                    <div style={productImgItemStyle}>图片</div>
-                    <div style={productItemInfoStyle}>
-                        <div style={productItemInfoTextStyle}>
-                            商品介绍
-                        </div>
-                        <div style={productItemInfoPriceStyle}>
-                            <span style={productItemInfoTextareaStyle}>¥</span>
-                            <span style={productItemInfoTextareaStyle}>8888</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     }
 
     /*

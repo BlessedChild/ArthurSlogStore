@@ -7,6 +7,19 @@ class BodyContainer extends Component {
     render() {
         return <div className='storeActivity_bodyContainer'>
             <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <IdInputTable />
+            <div style={{ marginBottom: '256px' }}></div>
         </div>
     }
 }

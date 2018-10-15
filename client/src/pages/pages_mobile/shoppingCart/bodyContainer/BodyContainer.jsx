@@ -19,11 +19,24 @@ class BodyContainer extends Component {
             </div>
     }
     */
-   
+
     render() {
         return <div className='shoppingCart'>
-                <ProductTable />
-            </div>
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <ProductTable />
+            <div style={{ marginBottom: '256px' }}></div>
+        </div>
     }
 
     /*

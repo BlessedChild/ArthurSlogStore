@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 
 import BodyContainer from './bodyContainer/BodyContainer'
+import ReturnStoreIndex from './returnStoreIndex/ReturnStoreIndex'
 import Bottom from './bottom/Bottom'
 
 import './index.less'
@@ -21,7 +22,8 @@ class shoppingCart extends Component {
     render() {
         return <div>
             <BodyContainer />
-            <Bottom changePage = {this.props.changePage}/>
+            <ReturnStoreIndex changePage = {this.props.changePage}/>
+            <Bottom />
         </div>
     }
 }

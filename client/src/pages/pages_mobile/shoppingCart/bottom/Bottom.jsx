@@ -1,13 +1,6 @@
 import React, { Component } from 'react'
 
-
-const bottomStyle = { backgroundColor: '#FFFFFF', position: "fixed", bottom: 0, height: 128, width: '100%', fontSize: 28, textAlign: 'center' }
-const bottomTabBarStyle = { display: 'flex', alignItems: 'stretch', backgroundColor: '#FFFFFF', height: 128 }
-const bottomTabBarItemStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '1px', marginRight: '1px' }
-const bottomTabBarItemStyleLeft = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '0.5px', marginRight: '1px' }
-const bottomTabBarItemStyleRight = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '1px', marginRight: '0.5px' }
-const bottomTabBarItemImg = { height: '88px', width: '88px', textAlign: 'center', lineHeight: '88px', backgroundColor: '#FFFFFF' }
-const bottomTabBarItemText = { height: '40px' }
+import './Bottom.less'
 
 class Bottom extends Component {
 
@@ -21,31 +14,53 @@ class Bottom extends Component {
 
     //其他按钮同理
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            checked: true
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState(() => {
+            return { checked: (this.state.checked == true ? false : true) }
+        })
+    }
+
+
+    componentDidMount() {
+        this.setState(() => {
+            // Important: read `state` instead of `this.state` when updating.
+            return { checked: true }
+        })
+    }
+
     render() {
-        return <div className='bottom' style={bottomStyle}>
-            <div className='bottomTabBar' style={bottomTabBarStyle}>
-                <div className='storeIndex' style={bottomTabBarItemStyleLeft} onClick={this.touchBottomTabBar.bind(this, 0)}>
-                    <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>商城首页</div>
+        return <div className='bottom_count'>
+            <div className='bottom_left'>
+                <div className='bottom_left_selectAll'>
+                    <div className='bottom_left_selectAll_checkbox'>
+                        <label className='container'>
+                            <input type="checkbox" checked={this.state.checked} onChange={this.handleChange}></input>
+                            <span className="checkmark"></span>
+                        </label>
+                    </div>
+                    <div className='bottom_left_selectAll_checkbox_text'>全选</div>
                 </div>
-                <div className='shoppingCart' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 1)}>
-                    <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>全部商品</div>
+                <div className='bottom_left_priceTable'>
+                    <div className='bottom_left_priceTable_count'>总计：</div>
+                    <div className='bottom_left_priceTable_priceUnit'>¥</div>
+                    <div className='bottom_left_priceTable_priceValue'>888.00</div>
                 </div>
-                <div className='promotionCenter' style={bottomTabBarItemStyle} onClick={this.touchBottomTabBar.bind(this, 2)}>
-                    <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>购物车</div>
-                </div>
-                <div className='personalCenter' style={bottomTabBarItemStyleRight} onClick={this.touchBottomTabBar.bind(this, 3)}>
-                    <div style={bottomTabBarItemImg}>图片</div>
-                    <div style={bottomTabBarItemText}>个人中心</div>
+            </div>
+            <div className='bottom_right'>
+                <div className='bottom_right_table'>
+                    <div className='bottom_right_text'>去结算</div>
+                    <div className='bottom_right_valueText'>(0件)</div>
                 </div>
             </div>
         </div>
-    }
-
-    touchBottomTabBar(e) {
-        this.props.changePage(e)
     }
 }
 
