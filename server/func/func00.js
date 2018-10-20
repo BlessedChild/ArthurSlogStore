@@ -9,7 +9,6 @@
 
 function func(object) {
 
-
     if (object == null) {
         return `客户端传来的值是空的`
     }
