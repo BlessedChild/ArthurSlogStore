@@ -9,8 +9,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 
 const Issue = require('./issue.js')
-// 引入函数
+// 引入测试函数
 const Func1 = require('./func1.js')
+// 引入‘公告栏’函数
+const BulletinBoard = require('./func/func00.js')
 
 // 引入mongodb驱动
 const MongoClient = require('mongodb').MongoClient
@@ -314,20 +316,31 @@ app.all('/api/client', (req, res) => {
     // 也就是 func + object 这样的数据结构
     // 所以 首先判断func的值 然后根据不同的值 执行不同的函数
     switch (recDatas.func) {
+        // 这个是前后端接口的测试功能
         case 0:
             console.log('接收到了func等于0的数据')
             res.header("Access-Control-Allow-Origin", "*")
+            //res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
+            //res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
+            //res.header("X-Powered-By", ' 3.2.1')
+            //res.header("Content-Type", "application/json;charset=utf-8")
+            // 这里 我们把object传给函数进行处理 同时还需要把res也传给函数 可以对客户端做出反馈
+            //const results = Func1.func1(recDatas.object)
+            //res.json(results)
+            //console.log(results)
+            break;
+        // 这个来写第一个正式功能
+        // 这个写个什么功能好？给前端推点界面的数据好了
+        // 这个就推给‘商城首页’里面‘公告栏’组件的数据好了
+        // 首先 把功能写出来 单独一个js文件
+        case 1:
+            console.log('客户端请求公告栏的数据')
+            res.header("Access-Control-Allow-Origin", "*")
             res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
             res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-            res.header("X-Powered-By", ' 3.2.1')
-            res.header("Content-Type", "application/json;charset=utf-8")
-            // 这里 我们把object传给函数进行处理 同时还需要把res也传给函数 可以对客户端做出反馈
-            const results = Func1.func1(recDatas.object)
-            res.json(results)
-            console.log(results)
-            break;
-        case 1:
-            Func1(recDatas.object, res);
+            //res.header("Content-Type", "application/json;charset=utf-8")
+            let result = BulletinBoard.ReturnBBInfo(recDatas.object)
+            res.json(result)
             break;
         case 2:
             Func1(recDatas.object, res);
@@ -347,8 +360,7 @@ app.all('/api/client', (req, res) => {
             res.header("Access-Control-Allow-Origin", "*")
             res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
             res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-            res.header("X-Powered-By", ' 3.2.1')
-            res.header("Content-Type", "application/json;charset=utf-8")
+            //res.header("Content-Type", "application/json;charset=utf-8")
             res.json('error');
     }
 })

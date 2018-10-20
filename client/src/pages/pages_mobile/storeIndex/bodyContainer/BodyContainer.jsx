@@ -1,225 +1,180 @@
 import React, { Component } from 'react'
 
+// 引入轮播组件
 import Carouselarea from './carouselarea/carouselarea'
-
 // 引入配置文件
 import Config from '../../../../config.json'
+// 引入样式文件
+import './BodyContainer.less'
 
-const bulletinBoardStyle = { alignItems: 'center', display: 'flex', flexDirection: 'raw', width: '100%', height: 64, fontSize: 40, textAlign: 'center', borderStyle: 'none' }
-const productListStyle = { width: '100%', fontSize: 40, textAlign: 'center' }
-const dividingLineStyle = { backgroundColor: '#000000', height: 1, width: '100%' }
-const recommendStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#FFFFFF', width: '100%' }
-const navigationBarStyle = { display: 'flex', alignItems: 'stretch', backgroundColor: '#FFFFFF' }
-const navigationBarItemStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '25%', marginLeft: '10px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const navigationBarItemStyleLeft = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '25%', marginLeft: '20px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const navigationBarItemStyleLRight = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '25%', marginLeft: '10px', marginRight: '20px', textAlign: 'center', fontSize: '30' }
-const categoryStyle = { display: 'flex', alignItems: 'stretch', backgroundColor: '#FFFFFF' }
-const categoryItemStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '10px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const categoryItemStyleLeft = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '20px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const categoryItemStyleLRight = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '10px', marginRight: '20px', textAlign: 'center', fontSize: '30' }
-const categoryImgItemStyleLeft = { width: '220px', height: '220px', textAlign: 'center', lineHeight: '220px', backgroundColor: '#FFFFFF' }
-const productStyle = { display: 'flex', alignItems: 'stretch', backgroundColor: '#FFFFFF' }
-// const productItemStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '33.3%', marginLeft: '10px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const productItemStyleLeft = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '50%', marginLeft: '20px', marginRight: '10px', textAlign: 'center', fontSize: '30' }
-const productItemStyleRight = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', color: '#000000', width: '50%', marginLeft: '10px', marginRight: '20px', textAlign: 'center', fontSize: '30' }
-const productImgItemStyle = { width: '400px', height: '400px', textAlign: 'center', lineHeight: '400px', backgroundColor: '#FFFFFF' }
-
-const productItemInfoTextStyle = { width: '400px', marginLeft: '0px', textAlign: 'left' }
-const productItemInfoPriceStyle = { width: '400px', marginLeft: '0px', textAlign: 'left' }
-const productItemInfoStyle = { alignItems: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#d8f0f3', width: '400px' }
-const productItemInfoTextareaStyle = { width: '400px', textAlign: 'left', margin: '0px' }
-
-const bulletinBoardIconStyle = { width: '56px', height: '56px', fontSize: '12px', textAlign: 'center', lineHeight: '56px', marginLeft: '20px' }
-const recommendIconStyle = { width: '256px', height: '256px', textAlign: 'center', lineHeight: '256px', borderStyle: 'solid' }
-
-
-const navigationBarIconItemStyle = { width: '200px', height: '200px', textAlign: 'center', lineHeight: '200px', backgroundColor: '#FFFFFF', borderStyle: 'solid' }
-
-// BodyContainet区域的样式
-// const bodyContainerBarStyle = { position: "relative", marginTop: 0, marginBottom: 128, height: '100%', width: '100%' }
-
-// BodyContainer区域渲染的内容
 class BodyContainer extends Component {
+    constructor(props) {
+        super(props)
+        this.state = { bulletinBoard_Text: '' }
+
+        this.recbulletinBoard_Text = this.recbulletinBoard_Text.bind(this)
+    }
 
     render() {
-        return <div>
+        return <div className='mobile_StoreIndex_BodyContainer'>
             <Carouselarea />
-            <div>
-                <div style={dividingLineStyle}></div>
-                <div style={bulletinBoardStyle} onClick={this.toucha}>
-                    <div style={bulletinBoardIconStyle} >图片</div>
-                    <div className='bulletinBoard'>bulletinBoard（公告栏）</div>
-                </div>
-                <div style={dividingLineStyle}></div>
+            <div className='bulletinBoard'>
+                <div className='bulletinBoardImg'>图片</div>
+                <div className='bulletinBoardBar'>{this.state.bulletinBoard_Text}</div>
             </div>
-            <div className='navigationBar' style={navigationBarStyle}>
-                <div style={navigationBarItemStyleLeft}>
-                    <div style={navigationBarIconItemStyle}>图片</div>
+            <div className='navigationBar'>
+                <div className='navigationBarItem'>
+                    <div className='navigationBarIconItem'>图片</div>
                     <div>所有商品</div>
                 </div>
-                <div style={navigationBarItemStyle}>
-                    <div style={navigationBarIconItemStyle}>图片</div>
+                <div className='navigationBarItem'>
+                    <div className='navigationBarIconItem'>图片</div>
                     <div>拼团</div>
                 </div>
-                <div style={navigationBarItemStyle}>
-                    <div style={navigationBarIconItemStyle}>图片</div>
+                <div className='navigationBarItem'>
+                    <div className='navigationBarIconItem'>图片</div>
                     <div>限时促销</div>
                 </div>
-                <div style={navigationBarItemStyleLRight}>
-                    <div style={navigationBarIconItemStyle}>图片</div>
+                <div className='navigationBarItem'>
+                    <div className='navigationBarIconItem'>图片</div>
                     <div>秒杀</div>
                 </div>
             </div>
-            <div style={dividingLineStyle}></div>
-            <div className='recommend' style={recommendStyle}>
-                <div style={recommendIconStyle}>图片</div>
+            <div className='recommendBar'>
+                <div className='recommendBarImg'>图片</div>
                 <div>热销推荐</div>
             </div>
-            <div style={dividingLineStyle}></div>
-            <div className='category'>
-                <div style={categoryStyle}>
-                    <div style={categoryItemStyleLeft}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目1</div>
-                    </div>
-                    <div style={categoryItemStyle}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目2</div>
-                    </div>
-                    <div style={categoryItemStyleLRight}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目3</div>
-                    </div>
+            <div className='theBestProduct'>
+                <div className='theBestProduct_topBar'>
+                    <div className='theBestProduct_topBar_title'>镇店之宝</div>
+                    <div className='theBestProduct_topBar_more'>更多</div>
                 </div>
-                <div style={categoryStyle}>
-                    <div style={categoryItemStyleLeft}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目4</div>
+                <div className='theBestProductList'>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目1</div>
                     </div>
-                    <div style={categoryItemStyle}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目5</div>
-                    </div>
-                    <div style={categoryItemStyleLRight}>
-                        <div style={categoryImgItemStyleLeft}>图片</div>
-                        <div>类目6</div>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目2</div>
                     </div>
                 </div>
             </div>
-            <div style={dividingLineStyle}></div>
-            <div className='productList' style={productListStyle}>
-                <div style={productStyle}>
-                    <div style={productItemStyleLeft}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={productItemStyleRight}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
+            <div className='theBestProduct'>
+                <div className='theBestProduct_topBar'>
+                    <div className='theBestProduct_topBar_title'>专业工具</div>
+                    <div className='theBestProduct_topBar_more'>更多</div>
                 </div>
-                <div style={productStyle}>
-                    <div style={productItemStyleLeft}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
+                <div className='theBestProductList'>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目1</div>
                     </div>
-                    <div style={productItemStyleRight}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style={productStyle}>
-                    <div style={productItemStyleLeft}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={productItemStyleRight}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style={productStyle}>
-                    <div style={productItemStyleLeft}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style={productItemStyleRight}>
-                        <div style={productImgItemStyle}>图片</div>
-                        <div style={productItemInfoStyle}>
-                            <div style={productItemInfoTextStyle}>
-                                商品介绍
-                        </div>
-                            <div style={productItemInfoPriceStyle}>
-                                <span style={productItemInfoTextareaStyle}>¥</span>
-                                <span style={productItemInfoTextareaStyle}>8888</span>
-                            </div>
-                        </div>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目2</div>
                     </div>
                 </div>
             </div>
-            <div style={{ marginBottom: '256px' }}></div>
+            <div className='theBestProduct'>
+                <div className='theBestProduct_topBar'>
+                    <div className='theBestProduct_topBar_title'>新品上市</div>
+                    <div className='theBestProduct_topBar_more'>更多</div>
+                </div>
+                <div className='theBestProductList'>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目1</div>
+                    </div>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目2</div>
+                    </div>
+                </div>
+            </div>
+            <div className='theBestProduct'>
+                <div className='theBestProduct_topBar'>
+                    <div className='theBestProduct_topBar_title'>力荐专区</div>
+                    <div className='theBestProduct_topBar_more'>更多</div>
+                </div>
+                <div className='theBestProductList'>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目1</div>
+                    </div>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目2</div>
+                    </div>
+                </div>
+            </div>
+            <div className='theBestProduct'>
+                <div className='theBestProduct_topBar'>
+                    <div className='theBestProduct_topBar_title'>特惠专区</div>
+                    <div className='theBestProduct_topBar_more'>更多</div>
+                </div>
+                <div className='theBestProductList'>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目1</div>
+                    </div>
+                    <div className='theBestProductListItem'>
+                        <div className='theBestProductListItemImg'>图片</div>
+                        <div className='theBestProductListItemText'>类目2</div>
+                    </div>
+                </div>
+            </div>
+            <div className='aboutWe'>
+                <div className='aboutWeImg'>图片（关于我们）</div>
+                <div className='shoppingProcess'>图片（购物流程）</div>
+                <div className='customerService'>
+                    <div className='customerServiceTitle'>客服在线</div>
+                    <div className='customerServiceText'>售前售后的任何问题，请及时联系客户，我们一定妥善为您解决。如果没有得到及时的回复，也不要慌张，我们上线后会第一时间回复。</div>
+                </div>
+                <div className='OrderInfo'>
+                    <div className='OrderInfoTitle'>订单信息</div>
+                    <div className='OrderInfoText'>我们会按世纪付款顺序完成商品发货、尽快将宝贝呈进您的生活。如遇节假日或特殊天气，可能会延迟，请您耐心等待。关注公众号，进入店铺即可查询所有订单及订单状态</div>
+                </div>
+                <div className='tips'>
+                    <div className='tipsTitle'>温馨提示</div>
+                    <div className='tipsText'>每款商品的信息、活动、发货等会有所不用，下单前请务必查看清楚哟～</div>
+                </div>
+                <div className='others'>
+                    <div className='othersList'>
+                        <div className='othersListItem'>实物拍摄</div>
+                        <div className='othersListItem'>品质保障</div>
+                        <div className='othersListItem'>闪电发货</div>
+                    </div>
+                    <div className='purchaseNotes'>
+                        <div>购买须知</div>
+                        <div className='purchaseNotesArrow'>></div>
+                    </div>
+                </div>
+            </div>
+            <div className='mobile_personalCenter_bodyContainer_footer'>
+                <div className='mobile_personalCenter_bodyContainer_footer_nagivation'>
+                    <div>店铺主页</div>
+                    <div className='mobile_personalCenter_bodyContainer_footer_nagivation_line'></div>
+                    <div>推广中心</div>
+                    <div className='mobile_personalCenter_bodyContainer_footer_nagivation_line'></div>
+                    <div>关注我们</div>
+                    <div className='mobile_personalCenter_bodyContainer_footer_nagivation_line'></div>
+                    <div>店铺信息</div>
+                </div>
+                <div className='mobile_personalCenter_bodyContainer_footer_companyLogo'>
+                    <img src='' alt='公司Logo'></img>
+                </div>
+            </div>
+            <div style={{ marginBottom: '128px' }}></div>
         </div>
     }
 
+    componentDidMount() {
+        this.recbulletinBoard_Text()
+    }
 
-    toucha() {
-        const myObj = { func: 0, object: "test" }
+    recbulletinBoard_Text() {
+        const myObj = { func: 1, object: "test" }
         fetch(Config.baseUrl + 'api/client', {
             method: 'POST',
             headers: {
@@ -229,10 +184,19 @@ class BodyContainer extends Component {
         })
             .then(response => {
                 console.log('Add data to message successfuly')
+                // 这里获取到了服务端返回的‘公告栏’的数据 resmsg
                 const resmsg = response.json()
                 console.log('Response1: ', resmsg)
                 console.log('Response2: ', response)
                 return resmsg
+            })
+            .then(resmsg => {
+                // 然后 传值给‘公告栏’
+                // 接着 重新渲染（局部渲染）页面
+                // 语法 查一下setState里怎么使用对象
+                this.setState({
+                    bulletinBoard_Text: resmsg
+                })
             })
             .catch(err => {
                 alert("Error in sending data to server: " + err.message)

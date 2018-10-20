@@ -46,7 +46,6 @@ class Bottom extends Component {
                             <span className="checkmark"></span>
                         </label>
                     </div>
-                    <div className='bottom_left_selectAll_checkbox_text'>全选</div>
                 </div>
                 <div className='bottom_left_priceTable'>
                     <div className='bottom_left_priceTable_count'>总计：</div>
