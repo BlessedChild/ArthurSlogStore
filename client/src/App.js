@@ -129,7 +129,6 @@ class App extends Component {
             })
         }
       })
-
   }
 
   changebottomTabBar(newData) {

@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import Carouselarea from './carouselarea/carouselarea'
 
+// 引入配置文件
+import Config from '../../../../config.json'
+
 const bulletinBoardStyle = { alignItems: 'center', display: 'flex', flexDirection: 'raw', width: '100%', height: 64, fontSize: 40, textAlign: 'center', borderStyle: 'none' }
 const productListStyle = { width: '100%', fontSize: 40, textAlign: 'center' }
 const dividingLineStyle = { backgroundColor: '#000000', height: 1, width: '100%' }
@@ -214,11 +217,27 @@ class BodyContainer extends Component {
         </div>
     }
 
-    /*
+
     toucha() {
-        alert("Im an a")
+        const myObj = { func: 0, object: "test" }
+        fetch(Config.baseUrl + 'api/client', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(myObj),
+        })
+            .then(response => {
+                console.log('Add data to message successfuly')
+                const resmsg = response.json()
+                console.log('Response1: ', resmsg)
+                console.log('Response2: ', response)
+                return resmsg
+            })
+            .catch(err => {
+                alert("Error in sending data to server: " + err.message)
+            })
     }
-    */
 }
 
 export default BodyContainer
