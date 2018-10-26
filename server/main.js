@@ -4,66 +4,71 @@
 // 第三类是提供给 商城运营者的接口
 // 第四类是提供给 商城开发者的接口
 
+// 开发规范
+// 所有数据的交互 都通过根目录下的 main.js 
+// 其他任何文件 禁止上下路径的引用
+// 例如：
+// ./js/func1.js文件要引用 ./public/img/01.png文件的时候
+// 禁止使用 require(../../public/img/o1.png) 或者 url(../../public/img/o1.png)
+// 必须统一采用以下方式：
+// const config = require('./main.js') 
+// 箭头函数的使用：https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+// [] is array
+// {} is object
+// Arrays are Objects
+// Arrays are a special type of objects
+// The typeof operator in JavaScript returns "object" for arrays
+// But, JavaScript arrays are best described as arrays
+// Arrays use numbers to access its "elements". In this example, person[0] returns John:
+// const person = ["John", "Doe", 46]
+// Objects use names to access its "members". In this example, person.firstName returns John:
+// const person = {firstName:"John", lastName:"Doe", age:46}
+// 总结：
+// {}里面放的是object
+// 而[]是特殊的object
+// 所以 可以写成{[], [], []}或{{}, {}, {}}这样的形式
+// 也可以写成[{}, {}, {}]或[[], [], []]这样的形式
+
+// 引入路径方案解决第三方包
+// path.join()方法path使用特定于平台的分隔符作为分隔符将所有给定的段连接在一起 然后规范化生成的路径
+// 零长度path段会被忽略 如果连接的路径字符串是零长度字符串 则返回'.' 表示当前工作目录
+const path = require('path')
+
+// 这里config作为一个object 所以使用{}
+const config = {
+    jsUrl: path.join(__dirname, "/src/js"),
+    imgUrl: path.join(__dirname, "/src/public/img"),
+    // 公告栏显示的信息
+    BulletinBoardMsg: '[欢迎来到ArthurSlogStore]_当前时间是： ',
+    serverPort: 3000,
+    databaseBaseUrl: 'mongodb://localhost:27017',
+    databaseName: 'issuetracker'
+}
+// 导出工程的配置文件
+module.exports = config
+
+// 引入demo
+const Issue = require(path.join(config.jsUrl, "/issue.js"))
+// 引入测试函数
+const Func1 = require(path.join(config.jsUrl, "/func1.js"))
+// 引入‘公告栏’函数
+const BulletinBoard = require(path.join(config.jsUrl, "/func00.js"))
+
+// 引入express框架
 const express = require('express')
 // 因为express无法解析POST的body数据，所以需要引入中间件body-parser来解析数据
 const bodyParser = require('body-parser')
-
-const Issue = require('./issue.js')
-// 引入测试函数
-const Func1 = require('./func1.js')
-// 引入‘公告栏’函数
-const BulletinBoard = require('./func/func00.js')
-
-// 引入mongodb驱动
-const MongoClient = require('mongodb').MongoClient
 
 const app = express()
 
 app.use(express.static('static'))
 app.use(bodyParser.json())
 
-
-/*
-// 接收到请求后返回的数据
-const issues = [
-    {
-        id: 1,
-        status: 'Open',
-        owner: 'Ravan',
-        created: new Date('2018-08-18'),
-        effort: 5,
-        completionDate: undefined,
-        title: 'Error in console when clicking Add',
-    },
-    {
-        id: 2,
-        status: 'Assigned',
-        owner: 'Eddie',
-        created: new Date('2018-08-20'),
-        effort: 14,
-        completionDate: new Date('2018-08-22'),
-        title: 'Missing bottom border on panel',
-    },
-]
-*/
-
-/*
-// 接收到一个请求之后，返回一些数据
-app.all('/api/issues/GET', (req, res) => {
-    const metadata = { total_count: issues.length }
-
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "X-Requested-With")
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-    res.header("X-Powered-By", ' 3.2.1')
-    res.header("Content-Type", "application/json;charset=utf-8")
-
-    res.json({ _metadata: metadata, records: issues })
-
-    console.log('GET: have a req from client')
-})
-*/
-
+// 引入mongodb驱动
+const MongoClient = require('mongodb').MongoClient
+// 引入mongoose模块
+var mongoose = require('mongoose')
 
 // 接收到一个请求之后，返回一些数据
 app.all('/api/issues/GET', (req, res) => {
@@ -95,6 +100,7 @@ app.all('/api/issues/GET', (req, res) => {
         })
 
     console.log('GET: have a req from client')
+    console.log('--------------------')
 })
 
 
@@ -173,34 +179,6 @@ app.all('/api/issues/POST', (req, res) => {
         console.log('Client request is null!')
         return
     }
-
-
-    /*
-    res.set({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "X-Requested-With",
-        "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
-        "X-Powered-By": ' 3.2.1',
-        "Content-Type": "application/json"
-    });
-    */
-
-    /*
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-    res.header("X-Powered-By", ' 3.2.1')
-    res.header("Content-Type", "application/json;charset=utf-8")
-    */
-
-    // res.json(newIssue)
-
-    /*
-    const err = Issue.validIssueStatus(newIssue)
-    console.log('POST: have a req from client')
-    console.log(err)
-    */
-
     console.log('POST: have a req from client')
 })
 
@@ -240,78 +218,20 @@ app.all('/api/issues/POST', (req, res) => {
 // }
 
 app.all('/api/client', (req, res) => {
+    // Print body's datas from client
+    // 打印来自客户端的body里面的数据
+    // 由于解决跨域机制的原因
+    // 这里每次收到来自客户端的请求
+    // 都会执行两次
+    // 第一次body的值是空的
+    // 第二次才是客户端发过来的真实数据
     console.log(req.body)
-    // 接到来自客户端的数据
-    /*
-    const newDatas = req.body
-    // 对接受到的数据进行检测判断 这里是第一种方式
-    if ((newDatas.count != 0) && (newDatas.count < 5)) {
-        console.log('Accept: ', newDatas)
-        // newIssue.id = issues.length + 1
-        newIssue.created = new Date()
+    console.log('--------------------')
 
-        if (!newIssue.status)
-            newIssue.status = 'New'
-
-        // issues.push(newIssue)
-
-        const err = Issue.validIssueStatus(newIssue)
-        if (err) {
-            res.status(422).json({ message: `Invalid request: ${err}` })
-            return
-        }
-
-        if (!newIssue) {
-            console.log('newIssue is null')
-        }
-        else if (newIssue) {
-            db.collection('issues').insertOne(newIssue)
-                .then(result => {
-                    return db.collection('issues').find({ _id: result.insertedId }).limit(1).next()
-                })
-                .then(newIssue => {
-                    if (newIssue) {
-                        res.header("Access-Control-Allow-Origin", "*")
-                        res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
-                        res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-                        res.header("X-Powered-By", ' 3.2.1')
-                        res.header("Content-Type", "application/json;charset=utf-8")
-                        res.json(newIssue)
-                    } else {
-                        console.log('newIssue is null')
-                        return
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                    res.header("Access-Control-Allow-Origin", "*")
-                    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
-                    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-                    res.header("X-Powered-By", ' 3.2.1')
-                    res.header("Content-Type", "application/json;charset=utf-8")
-                    res.status(500).json({ message: `Internal Server Error: ${err}` })
-                    console.log('newIssue is error')
-                })
-        }
-    }
-    else {
-        // 如果接收到的数据不符合预期
-        res.header("Access-Control-Allow-Origin", "*")
-        res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
-        res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
-        res.header("X-Powered-By", ' 3.2.1')
-        res.header("Content-Type", "application/json;charset=utf-8")
-        res.json(newIssue)
-        console.log('Client request is err!')
-        return
-    }
-
-    console.log('POST: have a req from client')
-    */
-
-    // 现在采用第二种方式
+    // Save data from the client to the recDatas object
     // 首先接收到来自客户端的数据 并保存在 recDatas对象里
     const recDatas = req.body
+
     // 接着 我们约定好的数据结构 就是 包头+包体
     // 也就是 func + object 这样的数据结构
     // 所以 首先判断func的值 然后根据不同的值 执行不同的函数
@@ -329,12 +249,14 @@ app.all('/api/client', (req, res) => {
             //res.json(results)
             //console.log(results)
             break;
+
         // 这个来写第一个正式功能
         // 这个写个什么功能好？给前端推点界面的数据好了
         // 这个就推给‘商城首页’里面‘公告栏’组件的数据好了
         // 首先 把功能写出来 单独一个js文件
         case 1:
             console.log('客户端请求公告栏的数据')
+            console.log('--------------------')
             res.header("Access-Control-Allow-Origin", "*")
             res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type")
             res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS")
@@ -365,48 +287,271 @@ app.all('/api/client', (req, res) => {
     }
 })
 
-/*
-// 开启web服务器，监听 3000 端口 
-app.listen(3000, () => {
-    console.log('Server start on port 3000 ')
-})
-*/
-
+// Database object
+// 数据库对象
 let db
-/*
-// Connection URL
-const url = 'mongodb://localhost:27017';
 
-// Database Name
-const dbName = 'issuetracker';
+// 数据操作函数区
+// 数据库和集合： https://docs.mongodb.com/manual/core/databases-and-collections/
 
-// Create a new MongoClient
-const client = new MongoClient(url, { useNewUrlParser: true });
-
-// Use connect method to connect to the Server
-client.connect()
-    .then(() => {
-        console.log("Connected successfully to server");
-
-        db = client.db(dbName);
-
-        app.listen(3000, () => {
-            console.log('Server start on port 3000 ')
+// Create database
+// 创建数据库
+// 在 MongoDB 中创建一个数据库 需要创建一个 MongoClient 对象
+// 不指定数据库名 默认打开 test 数据库
+// 然后指定数据库的 URL 和 端口
+// 当数据库不存在时 MongoDB 会根据你给的 数据库名 创建新的数据库并建立连接
+function create_MongodbDatabase(config) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(connection => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
         })
-    })
-    .catch(err => {
-        console.log('Error: ', err)
-    })
-*/
+        .then(db => {
+            // Returns the name of the current database
+            // 返回当前数据库的名称
+            console.log('数据库' + db.getName() + '创建成功')
+            console.log('--------------------')
+            return db
+        })
+        .then(db => {
+            db.close()
+        })
+        .catch(err => {
+            console.log('Error: ' + err)
+            console.log('--------------------')
+        })
+}
 
+// Create collection
+// 创建集合（如果数据库和集合都不存在 那么会根据指定的数据库名和集合名创建新的数据库和集合）
+// 有三种方式创建集合，例如：
+// db.myNewCollection2.insertOne( { x: 1 } )
+// db.myNewCollection3.createIndex( { y: 1 } )
+// db.createCollection(name, options)
+// options 的约定 请参考：https://docs.mongodb.com/manual/reference/method/db.createCollection/#db.createCollection
+// 在 MongoDB 的数据库中创建一个集合 需要创建一个 MongoClient 对象
+// 然后指定数据库的 URL 和 端口
+// 然后使用 createCollection() 方法来创建集合
+function create_MongodbCollection(config) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(connection => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            db.createCollection('Slog')
+            return db
+        })
+        .then(db => {
+            console.log('集合创建成功')
+            console.log('--------------------')
+            db.close()
+        })
+        .catch(err => {
+            console.log('Error: ' + err)
+            console.log('--------------------')
+        })
+}
 
-MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true })
+// Document operate
+// 文档操作
+// 与 MySQL 不同的是 MongoDB 会自动创建数据库和集合
+// 所以使用前我们不需要手动去创建
+// 向集合插入文档（document）
+// 例如：
+// document = { name: "ArthurSlog", url: "https://www.arthurslog.com" }
+function create_MongodbDocument(collection, document) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在向集合 ' + collection + ' 插入文档...')
+            db.collection(collection).insertOne(document)
+                .then(result => {
+                    console.log('文档插入成功')
+                    console.log('插入结果 => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// 查询数据
+// 查询条件： condition
+// 例如：condition = {name:'ArthurSlog'}
+function read_MongodbDocument(collection, condition) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在集合查询 ' + collection + ' 里的文档...')
+            db.collection(collection).find(condition).toArray()
+                .then(result => {
+                    console.log('查询成功')
+                    console.log('查询结果 => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// 更新数据
+// 查询条件： condition
+// 例如：condition = {name:'ArthurSlog'}
+// 更新动作： updateAction
+// 例如：updateAction = {$set: { url : "https://www.arthurslog.com" }}
+function upade_MongodbDocument(collection, condition, updateAction) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在更新集合 ' + collection + ' 中的文档')
+            db.collection(collection).updateOne(condition, updateAction)
+                .then(result => {
+                    console.log('文档更新成功')
+                    console.log('更新结果 => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// 移除数据
+// 查询条件： condition
+// 例如：condition = {name:'ArthurSlog'}
+function delete_MongodbDocument(collection, condition) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在集合 ' + collection + ' 中移除文档')
+            db.collection(collection).deleteOne(condition)
+                .then(result => {
+                    console.log('文档移除成功')
+                    console.log('移除结果 => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// 排序： 
+// 按 type 字段升序
+// sort_Mongodb = { type: 1 }  
+// 按 type 字段降序
+// sort_Mongodb = { type: -1 } 
+// 例如：
+// db.collection(collection).find().sort(sort_Mongodb).toArray()
+// 对查询到的结果进行排序：
+
+// 查询数据
+// 查询条件： condition
+// 例如：condition = {name:'ArthurSlog'}
+function read_MongodbDocument(collection, condition, sort_Mongodb) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在集合查询 ' + collection + ' 里的文档...')
+            db.collection(collection).find(condition).sort(sort_Mongodb).toArray()
+                .then(result => {
+                    console.log('排序成功')
+                    console.log('排序结果' + '(' + ((sort_Mongodb == 1) ? '升序' : '降序') + ')' +  ' => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// 分页： 
+// 查询的返回条数：limit_Mongodb
+
+// 查询数据
+// 查询条件： condition
+// 例如：condition = {name:'ArthurSlog'}
+function read_MongodbDocument(collection, condition, limit_Mongodb) {
+    MongoClient.connect(config.databaseBaseUrl)
+        .then(() => {
+            // Connect specified database
+            // 连接指定的数据库
+            return connection.db(config.databaseName)
+        })
+        .then(db => {
+            console.log('成功连接到' + '数据库' + db.getName())
+            return db
+        })
+        .then(db => {
+            console.log('正在集合查询 ' + collection + ' 里的文档...')
+            db.collection(collection).find(condition).limit(limit_Mongodb).toArray()
+                .then(result => {
+                    console.log('查询成功')
+                    console.log('查询结果 => ')
+                    console.log(result)
+                    console.log('--------------------')
+                })
+        })
+}
+
+// Enter point
+// 程序的入口点
+// Connect database base Url
+// 连接数据库的基地址（连接成功后才连接指定的数据库）
+MongoClient.connect(config.databaseBaseUrl, { useNewUrlParser: true })
     .then(connection => {
-        db = connection.db('issuetracker')
-        app.listen(3000, () => {
-            console.log('Server start on port 3000 ')
+        // Connect specified database
+        // 连接指定的数据库
+        db = connection.db(config.databaseName)
+    })
+    .then(() => {
+        // Start server 
+        // 启动服务
+        app.listen(config.serverPort, () => {
+            console.log('Server start on port: ' + config.serverPort)
         })
     })
     .catch(err => {
+        // Print error informations on console
+        // 打印出错信息
         console.log('Error: ', err)
     })
