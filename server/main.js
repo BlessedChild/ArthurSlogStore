@@ -13,6 +13,12 @@
 // 必须统一采用以下方式：
 // const config = require('./main.js') 
 // 箭头函数的使用：https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+// 什么是回调？
+// 初次见面
+// 希望可以为您效劳
+// 这是我的号码（代表）
+// 所以如果发生了什么事（事件）
+// 请打电话给我（回调）
 
 // [] is array
 // {} is object
